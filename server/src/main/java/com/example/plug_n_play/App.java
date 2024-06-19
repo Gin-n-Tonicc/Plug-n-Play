@@ -78,7 +78,7 @@ public class App {
 			int pagesCountInt = Integer.parseInt(pagesCount);
 			int maxDataMBInt = Integer.parseInt(maxDataMB) * 1024*1024;
 			Crawler.SITE_ID = site_id;
-			CrawelerStart.run(url, dirWorking, maxDataMBInt, pagesCountInt);
+			CrawlerStart.run(url, dirWorking, maxDataMBInt, pagesCountInt);
 			
 			//
 			// Rename working folder to site_id in order Embeddings to be able to pick it up
@@ -98,7 +98,7 @@ public class App {
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			CrawelerStart.shutdown();
+			CrawlerStart.shutdown();
 			
 			String newLine = "\r\n";
 			StringBuilder sbError = new StringBuilder();

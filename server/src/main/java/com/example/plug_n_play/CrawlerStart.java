@@ -7,7 +7,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
-public class CrawelerStart {
+public class CrawlerStart {
 
 	final static int MAX_CRAWL_DEPTH = 4;
     final static int NUMBER_OF_CRAWELRS = 2;
