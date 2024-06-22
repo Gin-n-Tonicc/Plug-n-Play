@@ -1,0 +1,33 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ 'health', 'healthcheck', 'prometheus' ]
+      base-path: '/admin'
+      path-mapping:
+        prometheus: '/metrics'
+server:
+  port: 8081
+spring:
+  application.name: plug-n-play
+  datasource:
+    url: '${DB_URL}'
+    driverClassName: org.postgresql.Driver
+    username: '${DB_USERNAME}'
+    password: '${DB_PASSWORD}'
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  ai:
+    openai.api-key: sk-proj-tkI9KADGK8v26aQ9PgTUT3BlbkFJr3gwaY6dZ2SQDFY0RoOj
+springdoc:
+  api-docs:
+    path: /apidoc
+  swagger-ui:
+    path: /swagger-ui/index.html
+
+
