@@ -23,7 +23,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   ai:
-    openai.api-key: sk-proj-tkI9KADGK8v26aQ9PgTUT3BlbkFJr3gwaY6dZ2SQDFY0RoOj
+    openai.api-key: '${OPENAI_KEY}'
 springdoc:
   api-docs:
     path: /apidoc
