@@ -10,20 +10,34 @@ server:
   port: 8081
 spring:
   application.name: plug-n-play
-  datasource:
-    url: '${DB_URL}'
-    driverClassName: org.postgresql.Driver
-    username: '${DB_USERNAME}'
-    password: '${DB_PASSWORD}'
-  jpa:
-    generate-ddl: false
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+#  datasource:
+#    url: '${DB_URL}'
+#    driverClassName: org.postgresql.Driver
+#    username: '${DB_USERNAME}'
+#    password: '${DB_PASSWORD}'
+#  jpa:
+#    generate-ddl: false
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
   ai:
     openai.api-key: '${OPENAI_KEY}'
+    vectorstore:
+      mongodb:
+        initialize-schema: false
+  data:
+    openai:
+      api-key: '${OPENAI_KEY}'
+    mongodb:
+      uri: 'mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_CLUSTER}.xhq4vkg.mongodb.net/?retryWrites=true&w=majority&appName=${DB_APP_NAME}'
+      database: '${DB_CLUSTER}'
+      initialize-schema: false
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
+    com.mongodb: DEBUG
 springdoc:
   api-docs:
     path: /apidoc
