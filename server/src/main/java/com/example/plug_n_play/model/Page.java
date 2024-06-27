@@ -1,0 +1,27 @@
+package com.example.plug_n_play.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Table(name = "pages")
+public class Page {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "site_id")
+    private Site site;
+    private String title;
+    private String metaData;
+    private String data;
+    private String url;
+}
