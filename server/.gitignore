@@ -1,5 +1,5 @@
 HELP.md
-../server1/target/
+target/
 !../../server/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Crawler4j ###
+./src/test/resources/crawler4j/
+./src/test/resources/crawler4j/**
+**/crawler4j/
+**/crawler4j/**
+

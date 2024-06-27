@@ -1,20 +1,22 @@
-package com.example.plug_n_play;
+package com.example.plug_n_play.services;
 
 import com.example.plug_n_play.model.Site;
 import com.example.plug_n_play.repository.SiteRepository;
+import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.net.URL;
 
 @Service
+@RequiredArgsConstructor
 public class ExcelReaderService {
 
-    @Autowired
-    private SiteRepository siteRepository;
+    private final SiteRepository siteRepository;
 
     public void readExcelFile() throws IOException {
         String filePath = "server/src/main/resources/static/files/pnp.xlsx";
@@ -52,7 +54,7 @@ public class ExcelReaderService {
     }
 
     private String getCellValueAsString(Cell cell) {
-        if(cell == null){
+        if (cell == null) {
             return "";
         }
 
