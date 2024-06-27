@@ -7,41 +7,34 @@ management:
       path-mapping:
         prometheus: '/metrics'
 server:
-  port: 8081
+  port: 8080
 spring:
   application.name: plug-n-play
-#  datasource:
-#    url: '${DB_URL}'
-#    driverClassName: org.postgresql.Driver
-#    username: '${DB_USERNAME}'
-#    password: '${DB_PASSWORD}'
-#  jpa:
-#    generate-ddl: false
-#    hibernate:
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
   ai:
-    openai.api-key: '${OPENAI_KEY}'
     vectorstore:
-      mongodb:
-        initialize-schema: false
-  data:
+      pgvector:
+        initialize-schema: true
     openai:
-      api-key: '${OPENAI_KEY}'
-    mongodb:
-      uri: 'mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_CLUSTER}.xhq4vkg.mongodb.net/?retryWrites=true&w=majority&appName=${DB_APP_NAME}'
-      database: '${DB_CLUSTER}'
-      initialize-schema: false
-logging:
-  level:
-    org.springframework.data.mongodb: DEBUG
-    com.mongodb: DEBUG
+      api-key: ${OPENAI_API_KEY}
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    driverClassName: org.postgresql.Driver
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  docker:
+    compose:
+      lifecycle-management: start_only
+      file: server/docker-compose.yml
 springdoc:
   api-docs:
     path: /apidoc
   swagger-ui:
     path: /swagger-ui/index.html
-
 

@@ -32,11 +32,8 @@ public class Crawler extends WebCrawler{
 	public static int dataSize = 0;
 	public static int maxDataMB = 50 * 1000000; // 50 MB
 	
-	//WebDriver webDriver = new FirefoxDriver();
 	WebDriver webDriver = null;
-	
-	private static Logger logger = Logger.getLogger(App.class);
-	
+
 	public static HashMap<String, String> filesMap = new HashMap<String, String>();
 	
 	/**
@@ -61,7 +58,7 @@ public class Crawler extends WebCrawler{
 	
 	        return result;
         } catch (URISyntaxException e) {
-        	ErrorLogger.logException(e, url.getURL(), SITE_ID);
+//        	ErrorLogger.logException(e, url.getURL(), SITE_ID);
         	return false;
         }
     }
@@ -93,7 +90,7 @@ public class Crawler extends WebCrawler{
 	            try {
 	            	writeToFile(fileName, txtParseData.getTextContent(), url);
 	            } catch (IOException e) {
-	            	ErrorLogger.logException(e, fileName, SITE_ID);
+//	            	ErrorLogger.logException(e, fileName, SITE_ID);
 	            }
         	} 
             // .doc and .pdf files
@@ -102,7 +99,7 @@ public class Crawler extends WebCrawler{
                 try {
                 	writeToFile(fileName, page.getContentData(), url);
                 } catch (IOException e) {
-                	ErrorLogger.logException(e, fileName, SITE_ID);
+//                	ErrorLogger.logException(e, fileName, SITE_ID);
                 }        		
         	}
         }
@@ -121,7 +118,7 @@ public class Crawler extends WebCrawler{
                 	
                 	writeToFile(fileName, content, url);
                 } catch (IOException e) {
-                	ErrorLogger.logException(e, url, SITE_ID);
+//                	ErrorLogger.logException(e, url, SITE_ID);
                 }        		
         	} 
         	else {
@@ -132,7 +129,7 @@ public class Crawler extends WebCrawler{
                 try {
                 	writeToFile(fileName, html, url);
                 } catch (IOException e) {
-                	ErrorLogger.logException(e, fileName, SITE_ID);
+//                	ErrorLogger.logException(e, fileName, SITE_ID);
                 }        		        		
         	}
         }
