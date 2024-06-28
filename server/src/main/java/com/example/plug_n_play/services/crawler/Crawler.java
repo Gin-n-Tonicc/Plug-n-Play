@@ -4,6 +4,7 @@ package com.example.plug_n_play.services.crawler;
 import com.example.plug_n_play.model.Site;
 import com.example.plug_n_play.repository.PageRepository;
 import com.example.plug_n_play.repository.SiteRepository;
+import com.example.plug_n_play.services.PageService;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
@@ -22,6 +23,7 @@ public class Crawler extends WebCrawler {
     private final PageRepository pageRepository;
     private final SiteRepository siteRepository;
     private final CrawlerExtractor crawlerExtractor;
+    private final PageService pageService;
 
     @Override
     public boolean shouldVisit(Page referringPage, WebURL webURL) {
@@ -43,14 +45,13 @@ public class Crawler extends WebCrawler {
             Document htmlDoc = Jsoup.parse(htmlParseData.getHtml());
             WebURL webURL = pageToVisit.getWebURL();
             String url = webURL.getURL();
-            String parentUrl = webURL.getParentUrl();
 
             System.out.println("WEB URL: " + url);
             System.out.println("WEB PARENT URL: " + webURL.getParentUrl());
             System.out.println("WEB DOMAIN: " + webURL.getDomain());
             Site site = siteRepository.getSiteByUrlContaining(webURL.getDomain()).orElse(null);
 
-            if (site == null || (parentUrl != null && !url.contains(parentUrl))) {
+            if (site == null) {
                 System.out.println(" SKIPPED");
                 return;
             }
@@ -65,8 +66,9 @@ public class Crawler extends WebCrawler {
             page.setTitle(title);
             page.setMetaData(metadata.toString());
             page.setSite(site);
-            pageRepository.save(page);
+            var savedPage = pageRepository.save(page);
 
+            pageService.savePageToVectorDatabase(savedPage);
             System.out.println(" SAVED");
         }
     }
